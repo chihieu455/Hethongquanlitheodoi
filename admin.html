@@ -1,0 +1,199 @@
+            <!-- ADMIN: DASHBOARD -->
+            <section id="page-adm-dashboard" class="page-view hidden space-y-6">
+                <h2 class="text-2xl font-bold text-slate-800">Dashboard Quản Trị Hệ Thống</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <p class="text-xs text-slate-500">Tổng người dùng</p>
+                        <h3 class="text-2xl font-extrabold text-purple-600 mt-1">2,450</h3>
+                        <span class="text-[10px] text-emerald-600 font-bold">180 tài khoản mới kỳ này</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <p class="text-xs text-slate-500">Số môn học active</p>
+                        <h3 class="text-2xl font-extrabold text-blue-600 mt-1">84 môn</h3>
+                        <span class="text-[10px] text-slate-500">120 lớp học phần</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <p class="text-xs text-slate-500">Dung lượng dữ liệu</p>
+                        <h3 class="text-2xl font-extrabold text-emerald-600 mt-1">128 GB</h3>
+                        <span class="text-[10px] text-slate-500">Băng thông ổn định</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <p class="text-xs text-slate-500">Cảnh báo hệ thống</p>
+                        <h3 class="text-2xl font-extrabold text-slate-700 mt-1">0 Lỗi</h3>
+                        <span class="text-[10px] text-emerald-600 font-bold">Uptime 99.9%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: QUẢN LÝ NGƯỜI DÙNG -->
+            <section id="page-adm-users" class="page-view hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <h2 class="text-2xl font-bold text-slate-800">Quản Lý Tài Khoản Người Dùng</h2>
+                    <button onclick="openModal('modal-add-user')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-user-plus"></i> Thêm Người Dùng Mới
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase font-semibold">
+                                <tr>
+                                    <th class="p-3">Họ và tên</th>
+                                    <th class="p-3">Email</th>
+                                    <th class="p-3">Vai trò</th>
+                                    <th class="p-3">Trạng thái</th>
+                                    <th class="p-3">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-3 font-bold">Nguyễn Văn A</td>
+                                    <td class="p-3">sv001@edutrack.edu.vn</td>
+                                    <td class="p-3"><span class="bg-blue-100 text-brand-700 px-2 py-0.5 rounded text-[10px] font-bold">Sinh viên</span></td>
+                                    <td class="p-3 text-emerald-600 font-bold">Hoạt động</td>
+                                    <td class="p-3 flex gap-2">
+                                        <button onclick="showToast('Mở khóa / Sửa tài khoản!', 'info')" class="text-brand-600 font-bold">Sửa</button>
+                                        <button onclick="showToast('Đã khóa tài khoản!', 'error')" class="text-red-500 font-bold">Khóa</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">ThS. Trần Văn B</td>
+                                    <td class="p-3">lecturer01@edutrack.edu.vn</td>
+                                    <td class="p-3"><span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold">Giảng viên</span></td>
+                                    <td class="p-3 text-emerald-600 font-bold">Hoạt động</td>
+                                    <td class="p-3 flex gap-2">
+                                        <button onclick="showToast('Mở khóa / Sửa tài khoản!', 'info')" class="text-brand-600 font-bold">Sửa</button>
+                                        <button onclick="showToast('Đã khóa tài khoản!', 'error')" class="text-red-500 font-bold">Khóa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: MÔN HỌC & LỚP HỌC (Hoàn thiện đoạn bị ngắt) -->
+            <section id="page-adm-courses" class="page-view hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <h2 class="text-2xl font-bold text-slate-800">Quản Lý Môn Học & Lớp Học Phần</h2>
+                    <button onclick="showToast('Tạo môn học mới thành công!', 'success')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Thêm Môn Học
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <p class="text-xs text-slate-500">Danh mục môn học trong toàn bộ chương trình đào tạo:</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 text-slate-500 uppercase font-semibold">
+                                <tr>
+                                    <th class="p-3">Mã Môn</th>
+                                    <th class="p-3">Tên Môn Học</th>
+                                    <th class="p-3">Số TC</th>
+                                    <th class="p-3">Khoa Phụ Trách</th>
+                                    <th class="p-3">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-3 font-mono">INT201</td>
+                                    <td class="p-3 font-bold">Cơ sở dữ liệu</td>
+                                    <td class="p-3">3</td>
+                                    <td class="p-3">Khoa Công nghệ thông tin</td>
+                                    <td class="p-3 text-emerald-600 font-bold">Đang giảng dạy</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono">WEB301</td>
+                                    <td class="p-3 font-bold">Lập trình Web nâng cao</td>
+                                    <td class="p-3">3</td>
+                                    <td class="p-3">Khoa Công nghệ thông tin</td>
+                                    <td class="p-3 text-emerald-600 font-bold">Đang giảng dạy</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-mono">AI401</td>
+                                    <td class="p-3 font-bold">Trí tuệ nhân tạo</td>
+                                    <td class="p-3">4</td>
+                                    <td class="p-3">Khoa Khoa học dữ liệu</td>
+                                    <td class="p-3 text-emerald-600 font-bold">Đang giảng dạy</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: CẤU HÌNH HỆ THỐNG -->
+            <section id="page-adm-config" class="page-view hidden space-y-6">
+                <h2 class="text-2xl font-bold text-slate-800">Cấu Hình Thuật Toán & Tham Số AI</h2>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 max-w-2xl">
+                    <form onsubmit="event.preventDefault(); showToast('Đã lưu cấu hình tham số AI thành công!', 'success');" class="space-y-4 text-xs">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">Ngưỡng dự báo nguy cơ rớt môn (%):</label>
+                            <input type="number" value="70" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">Thời gian hết hạn mã QR điểm danh (Giây):</label>
+                            <input type="number" value="15" class="w-full px-3 py-2 border rounded-xl outline-none focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">Mô hình AI dự đoán mặc định:</label>
+                            <select class="w-full px-3 py-2 border rounded-xl bg-white outline-none focus:ring-2 focus:ring-purple-500">
+                                <option value="rf">Random Forest Classifier (Độ chính xác 94.2%)</option>
+                                <option value="xgb">XGBoost Learning Model</option>
+                                <option value="nn">Neural Network (Deep Learning Model)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="bg-purple-600 text-white font-bold px-4 py-2 rounded-xl hover:bg-purple-700 transition">Cập nhật tham số</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ADMIN: NHẬT KÝ HỆ THỐNG (LOGS) -->
+            <section id="page-adm-logs" class="page-view hidden space-y-6">
+                <h2 class="text-2xl font-bold text-slate-800">Nhật Ký Hoạt Động System Audit Log</h2>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs font-mono">
+                            <thead class="bg-slate-50 text-slate-500 uppercase">
+                                <tr>
+                                    <th class="p-3">Thời gian</th>
+                                    <th class="p-3">User</th>
+                                    <th class="p-3">Hành động</th>
+                                    <th class="p-3">IP Address</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-3 text-slate-500">2026-09-12 08:15:32</td>
+                                    <td class="p-3 font-bold text-blue-600">sv001@edutrack.edu.vn</td>
+                                    <td class="p-3">LOGIN_SUCCESS via Web App</td>
+                                    <td class="p-3">14.241.12.89</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 text-slate-500">2026-09-12 08:10:04</td>
+                                    <td class="p-3 font-bold text-emerald-600">lecturer01@edutrack.edu.vn</td>
+                                    <td class="p-3">GENERATE_QR_ATTENDANCE (Course INT201)</td>
+                                    <td class="p-3">118.69.182.10</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ADMIN: BÁO CÁO TỔNG HỢP -->
+            <section id="page-adm-reports" class="page-view hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-slate-800">Báo Cáo Thống Kê Toàn Trường</h2>
+                    <button onclick="showToast('Đang tạo báo cáo Excel...', 'success')" class="bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-900 transition flex items-center gap-2">
+                        <i class="fa-solid fa-file-excel"></i> Xuất Báo Cáo Excel
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm">Thống kê tỷ lệ học lực sinh viên toàn khóa</h3>
+                    <div class="h-64">
+                        <canvas id="canvas-adm-academic-stats"></canvas>
+                    </div>
+                </div>
+            </section>
+
