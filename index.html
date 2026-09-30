@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack - Hệ Thống Quản Lý Và Theo Dõi Tình Hình Học Tập Thông Minh</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="h-full font-sans antialiased text-slate-800 flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-brand-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center gap-3">
+                <button id="toggle-sidebar" type="button" aria-label="Open navigation menu" title="Open navigation menu" onclick="toggleSidebar()" class="md:hidden text-gray-200 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+                </button>
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigate('landing')">
+                    <i class="fa-solid fa-graduation-cap text-2xl text-blue-400"></i>
+                    <span class="font-bold text-xl tracking-wide">EduTrack</span>
+                    <span class="bg-blue-500/30 text-blue-200 border border-blue-400/30 text-[10px] px-2 py-0.5 rounded font-mono hidden sm:inline-block">v2.4 PRO</span>
+                </div>
+            </div>
+
+            <!-- Role Selector & User Profile Quick Control -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <!-- Chuyển vai trò nhanh (Demo Control) -->
+                <div class="flex items-center bg-brand-800 rounded-lg p-1 text-xs border border-brand-700">
+                    <span class="text-blue-200 px-2 font-medium hidden sm:inline">Chế độ Demo:</span>
+                    <select id="role-select" aria-label="Chọn vai trò demo" title="Chọn vai trò demo" onchange="switchRoleDemo(this.value)" class="bg-brand-900 text-white rounded px-2 py-1 focus:outline-none font-semibold text-xs border border-brand-500 cursor-pointer">
+                        <option value="guest">Khách / Chưa đăng nhập</option>
+                        <option value="student">🎓 Sinh viên</option>
+                        <option value="lecturer">👩‍🏫 Giảng viên</option>
+                        <option value="admin">🛠️ Admin</option>
+                    </select>
+                </div>
+
+                <button onclick="navigate('notifications')" title="Thông báo" class="relative text-gray-200 hover:text-white p-1.5 rounded-lg hover:bg-brand-800 transition">
+                    <i class="fa-solid fa-bell text-lg"></i>
+                    <span class="absolute top-0 right-0 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">3</span>
+                </button>
+
+                <!-- User Info Profile -->
+                <div id="user-profile-badge" class="flex items-center gap-2 cursor-pointer border-l border-brand-700 pl-3 md:pl-4" onclick="navigate('profile')">
+                    <img id="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="Avatar">
+                    <div class="hidden lg:block text-left">
+                        <span id="user-name" class="text-xs font-bold block leading-tight">Chưa đăng nhập</span>
+                        <span id="user-role-lbl" class="text-[10px] text-blue-300 block">Khách</span>
+                    </div>
+                </div>
+
+                <!-- Nút Đăng xuất -->
+                <button id="btn-logout" onclick="logoutUser()" title="Đăng xuất" class="hidden text-red-300 hover:text-red-100 hover:bg-red-500/20 p-2 rounded-lg transition text-xs font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="hidden md:inline">Thoát</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between overflow-y-auto custom-scrollbar transition-all duration-300 z-40 fixed md:relative -translate-x-full md:translate-x-0 inset-y-0 left-0 pt-16 md:pt-0">
+            <div class="p-3 space-y-5">
+                <!-- Navigation Groups -->
+                <div id="nav-group-public">
+                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 px-2">Chung & Hệ thống</p>
+                    <nav class="space-y-0.5">
+                        <button onclick="navigate('landing')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="landing">
+                            <i class="fa-solid fa-house w-4 text-brand-500"></i> Trang chủ
+                        </button>
+                        <button id="nav-btn-login" onclick="navigate('login')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="login">
+                            <i class="fa-solid fa-right-to-bracket w-4 text-brand-500"></i> Đăng nhập
+                        </button>
+                        <button id="nav-btn-register" onclick="navigate('register')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="register">
+                            <i class="fa-solid fa-user-plus w-4 text-brand-500"></i> Đăng ký
+                        </button>
+                        <button id="nav-btn-profile" onclick="navigate('profile')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition hidden" data-page="profile">
+                            <i class="fa-solid fa-id-card w-4 text-brand-500"></i> Hồ sơ tài khoản
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- SV Nav -->
+                <div id="nav-group-student" class="nav-role-group hidden">
+                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 px-2">🎓 Dành cho Sinh viên</p>
+                    <nav class="space-y-0.5">
+                        <button onclick="navigate('std-dashboard')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="std-dashboard">
+                            <i class="fa-solid fa-chart-line w-4 text-blue-500"></i> Dashboard SV
+                        </button>
+                        <button onclick="navigate('std-schedule')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="std-schedule">
+                            <i class="fa-solid fa-calendar-days w-4 text-blue-500"></i> Lịch học & Lịch thi
+                        </button>
+                        <button onclick="navigate('std-assignments')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="std-assignments">
+                            <i class="fa-solid fa-pen-to-square w-4 text-blue-500"></i> Bài tập cá nhân
+                        </button>
+                        <button onclick="navigate('std-attendance')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="std-attendance">
+                            <i class="fa-solid fa-user-check w-4 text-blue-500"></i> Điểm danh chuyên cần
+                        </button>
+                        <button onclick="navigate('std-warnings')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="std-warnings">
+                            <i class="fa-solid fa-triangle-exclamation w-4 text-amber-500"></i> Cảnh báo học tập
+                        </button>
+                        <button onclick="navigate('std-materials')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="std-materials">
+                            <i class="fa-solid fa-book-open w-4 text-blue-500"></i> Kho tài liệu bài giảng
+                        </button>
+                        <button onclick="navigate('std-results')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="std-results">
+                            <i class="fa-solid fa-award w-4 text-blue-500"></i> Bảng điểm toàn khóa
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- GV Nav -->
+                <div id="nav-group-lecturer" class="nav-role-group hidden">
+                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 px-2">👩‍🏫 Dành cho Giảng viên</p>
+                    <nav class="space-y-0.5">
+                        <button onclick="navigate('lec-dashboard')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="lec-dashboard">
+                            <i class="fa-solid fa-list-check w-4 text-emerald-600"></i> Tổng quan lớp học
+                        </button>
+                        <button onclick="navigate('lec-attendance')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="lec-attendance">
+                            <i class="fa-solid fa-qrcode w-4 text-emerald-600"></i> Điểm danh QR tự động
+                        </button>
+                        <button onclick="navigate('lec-assignments')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="lec-assignments">
+                            <i class="fa-solid fa-upload w-4 text-emerald-600"></i> Bài tập & Chấm điểm
+                        </button>
+                        <button onclick="navigate('lec-grades')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="lec-grades">
+                            <i class="fa-solid fa-table-cells w-4 text-emerald-600"></i> Quản lý & Nhập điểm
+                        </button>
+                        <button onclick="navigate('lec-analytics')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="lec-analytics">
+                            <i class="fa-solid fa-chart-pie w-4 text-emerald-600"></i> Biểu đồ & Thống kê
+                        </button>
+                        <button onclick="navigate('lec-materials')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="lec-materials">
+                            <i class="fa-solid fa-folder-open w-4 text-emerald-600"></i> Quản lý tài liệu môn
+                        </button>
+                        <button onclick="navigate('lec-feedback')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="lec-feedback">
+                            <i class="fa-solid fa-comments w-4 text-emerald-600"></i> Khảo sát & Phản hồi
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Admin Nav -->
+                <div id="nav-group-admin" class="nav-role-group hidden">
+                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 px-2">🛠️ Dành cho Admin</p>
+                    <nav class="space-y-0.5">
+                        <button onclick="navigate('adm-dashboard')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="adm-dashboard">
+                            <i class="fa-solid fa-gauge-high w-4 text-purple-600"></i> Dashboard Quản trị
+                        </button>
+                        <button onclick="navigate('adm-users')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="adm-users">
+                            <i class="fa-solid fa-users-gear w-4 text-purple-600"></i> Quản lý tài khoản
+                        </button>
+                        <button onclick="navigate('adm-courses')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="adm-courses">
+                            <i class="fa-solid fa-graduation-cap w-4 text-purple-600"></i> Môn học & Lớp HP
+                        </button>
+                        <button onclick="navigate('adm-config')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="adm-config">
+                            <i class="fa-solid fa-sliders w-4 text-purple-600"></i> Cấu hình hệ thống
+                        </button>
+                        <button onclick="navigate('adm-logs')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="adm-logs">
+                            <i class="fa-solid fa-clock-rotate-left w-4 text-purple-600"></i> Nhật ký hoạt động
+                        </button>
+                        <button onclick="navigate('adm-reports')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="adm-reports">
+                            <i class="fa-solid fa-file-invoice w-4 text-purple-600"></i> Báo cáo tổng hợp
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- AI Modules Nav -->
+                <div id="nav-group-ai" class="hidden">
+                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 px-2">🤖 Chức năng AI</p>
+                    <nav class="space-y-0.5">
+                        <button onclick="navigate('ai-risk')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="ai-risk">
+                            <i class="fa-solid fa-brain w-4 text-indigo-500"></i> AI Dự đoán nguy cơ
+                        </button>
+                        <button onclick="navigate('ai-advisor')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="ai-advisor">
+                            <i class="fa-solid fa-user-astronaut w-4 text-indigo-500"></i> AI Tư vấn học tập
+                        </button>
+                        <button onclick="navigate('ai-class-analytics')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="ai-class-analytics">
+                            <i class="fa-solid fa-chart-column w-4 text-indigo-500"></i> AI Phân tích chuyên sâu
+                        </button>
+                        <button onclick="navigate('ai-chatbot')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="ai-chatbot">
+                            <i class="fa-solid fa-robot w-4 text-indigo-500"></i> Chatbot Trợ lý học tập
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Shared Nav -->
+                <div>
+                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2 px-2">🌐 Tiện ích chung</p>
+                    <nav class="space-y-0.5">
+                        <button onclick="navigate('notifications')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="notifications">
+                            <i class="fa-solid fa-bell w-4 text-slate-500"></i> Thông báo hệ thống
+                        </button>
+                        <button onclick="navigate('support')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="support">
+                            <i class="fa-solid fa-headset w-4 text-slate-500"></i> Hỗ trợ & FAQ
+                        </button>
+                        <button onclick="navigate('forum')" class="nav-btn w-full flex items-center gap-3 px-3 py-2 text-xs rounded-lg hover:bg-slate-100 font-medium text-slate-700 transition" data-page="forum">
+                            <i class="fa-solid fa-newspaper w-4 text-slate-500"></i> Tin tức & Diễn đàn
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="p-3 border-t border-slate-200 bg-slate-50">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-[11px] text-slate-600 font-semibold">EduTrack AI System</span>
+                    </div>
+                    <span class="text-[10px] bg-slate-200 text-slate-700 font-mono px-1.5 py-0.5 rounded">2.4.0</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar bg-slate-50">
+            <!-- Các trang được nạp tự động từ thư mục pages/ bởi js/main.js -->
+        </main>
+    </div>
+
+    <!-- Modals được nạp từ partials/modals.html -->
+    <div id="modals-root"></div>
+
+    <!-- JavaScript (thứ tự quan trọng: main.js nạp cuối) -->
+    <script src="js/charts-lecturer.js"></script>
+    <script src="js/charts-admin.js"></script>
+    <script src="js/charts-ai.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/qr-timer.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

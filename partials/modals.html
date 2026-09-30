@@ -1,0 +1,93 @@
+    <!-- MODALS SYSTEM -->
+    <!-- Modal Nộp bài tập -->
+    <div id="modal-submit-assignment" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-slate-800 text-sm">Nộp Bài Tập Cá Nhân</h3>
+                <button onclick="closeModal('modal-submit-assignment')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="event.preventDefault(); showToast('Đã nộp bài tập thành công!', 'success'); closeModal('modal-submit-assignment');" class="space-y-3 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Chọn tệp bài làm (.zip, .pdf, .docx):</label>
+                    <input type="file" required class="w-full border p-2 rounded-xl">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Ghi chú cho Giảng viên:</label>
+                    <textarea rows="3" placeholder="Em gửi thầy bài làm..." class="w-full border p-2 rounded-xl outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-600 text-white font-bold py-2.5 rounded-xl hover:bg-brand-700 transition">Xác nhận nộp bài</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Giảng viên phát thông báo -->
+    <div id="modal-broadcast" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-slate-800 text-sm">Phát Thông Báo Cho Lớp Học</h3>
+                <button onclick="closeModal('modal-broadcast')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="event.preventDefault(); showToast('Đã phát thông báo thành công tới 45 SV!', 'success'); closeModal('modal-broadcast');" class="space-y-3 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Tiêu đề thông báo:</label>
+                    <input type="text" placeholder="Dời lịch học bù..." required class="w-full border p-2 rounded-xl outline-none">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Nội dung chi tiết:</label>
+                    <textarea rows="3" placeholder="Thông báo tới các em sinh viên..." required class="w-full border p-2 rounded-xl outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded-xl hover:bg-emerald-700 transition">Gửi thông báo ngay</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Tạo bài tập mới -->
+    <div id="modal-create-assignment" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-slate-800 text-sm">Tạo Bài Tập Mới</h3>
+                <button onclick="closeModal('modal-create-assignment')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="event.preventDefault(); showToast('Đã tạo bài tập mới thành công!', 'success'); closeModal('modal-create-assignment');" class="space-y-3 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Tên bài tập:</label>
+                    <input type="text" placeholder="BTVN Tuần 5..." required class="w-full border p-2 rounded-xl outline-none">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Hạn nộp:</label>
+                    <input type="datetime-local" required class="w-full border p-2 rounded-xl outline-none">
+                </div>
+                <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded-xl hover:bg-emerald-700 transition">Tạo bài tập</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Admin thêm người dùng -->
+    <div id="modal-add-user" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-slate-800 text-sm">Thêm Người Dùng Mới</h3>
+                <button onclick="closeModal('modal-add-user')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="event.preventDefault(); showToast('Đã khởi tạo tài khoản thành công!', 'success'); closeModal('modal-add-user');" class="space-y-3 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Họ và tên:</label>
+                    <input type="text" required class="w-full border p-2 rounded-xl outline-none">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Email:</label>
+                    <input type="email" required class="w-full border p-2 rounded-xl outline-none">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Vai trò:</label>
+                    <select class="w-full border p-2 rounded-xl bg-white outline-none">
+                        <option value="student">Sinh viên</option>
+                        <option value="lecturer">Giảng viên</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl hover:bg-purple-700 transition">Tạo người dùng</button>
+            </form>
+        </div>
+    </div>
+
