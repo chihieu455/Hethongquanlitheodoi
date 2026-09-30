@@ -1,0 +1,200 @@
+            <!-- TRANG CHỦ -->
+            <section id="page-landing" class="page-view space-y-8">
+                <div class="bg-gradient-to-r from-brand-900 via-brand-800 to-indigo-900 text-white rounded-3xl p-8 md:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+                    <div class="space-y-4 max-w-xl z-10">
+                        <span class="bg-blue-500/30 text-blue-200 border border-blue-400/30 text-xs px-3 py-1 rounded-full font-semibold inline-flex items-center gap-2">
+                            <i class="fa-solid fa-sparkles text-amber-300"></i> Nền Tảng AI Quản Lý & Theo Dõi Học Tập
+                        </span>
+                        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">EduTrack: Đột Phá Học Tập Cùng Trí Tuệ Nhân Tạo</h1>
+                        <p class="text-blue-100 text-sm md:text-base leading-relaxed">Đồng hành toàn diện cùng Sinh viên và Giảng viên. Theo dõi GPA, chuyên cần, tự động dự báo nguy cơ rớt môn sớm bằng mô hình AI học máy hiện đại.</p>
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <button onclick="navigate('login')" class="bg-white text-brand-900 font-bold px-6 py-3 rounded-xl hover:bg-blue-50 transition shadow-lg text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập ngay
+                            </button>
+                            <button onclick="navigate('register')" class="bg-brand-500 text-white font-bold px-6 py-3 rounded-xl hover:bg-brand-600 transition shadow-lg text-sm border border-brand-400 flex items-center gap-2">
+                                <i class="fa-solid fa-user-plus"></i> Đăng ký tài khoản
+                            </button>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-80 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center shadow-2xl z-10">
+                        <div class="w-16 h-16 bg-blue-500/30 text-blue-300 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 border border-blue-300/30">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="font-extrabold text-xl text-white">Giảm 42% Tỷ Lệ Cảnh Báo</h3>
+                        <p class="text-xs text-blue-200 mt-2 leading-relaxed">Nhờ thuật toán cảnh báo sớm nguy cơ rớt môn và trợ lý AI tư vấn lộ trình học cá nhân hóa 24/7.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-blue-100 text-brand-600 rounded-xl flex items-center justify-center text-xl font-bold mb-4"><i class="fa-solid fa-user-graduate"></i></div>
+                        <h3 class="font-bold text-slate-800 text-base mb-2">Cho Sinh viên</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Cập nhật thời khóa biểu, điểm số, chuyên cần theo thời gian thực. Nhận gợi ý phương pháp ôn tập từ AI Advisor.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl font-bold mb-4"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <h3 class="font-bold text-slate-800 text-base mb-2">Cho Giảng viên</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Điểm danh mã QR động chống gian lận, chấm điểm tự động, quản lý kho bài giảng và phân tích phân bố điểm số.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl font-bold mb-4"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3 class="font-bold text-slate-800 text-base mb-2">Cho Nhà Quản lý</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Báo cáo thống kê toàn diện cấp Khoa/Trường, phân quyền RBAC bảo mật cao, kiểm soát audit log hệ thống.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ĐĂNG NHẬP -->
+            <section id="page-login" class="page-view hidden max-w-md mx-auto py-8">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 space-y-6">
+                    <div class="text-center space-y-2">
+                        <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl font-bold mx-auto">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-slate-800">Cổng Đăng Nhập</h2>
+                        <p class="text-xs text-slate-500">Truy cập hệ thống EduTrack với tài khoản của bạn</p>
+                    </div>
+                    <form onsubmit="handleLoginFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label for="login-role" class="block text-xs font-semibold text-slate-700 mb-1">Đăng nhập với vai trò</label>
+                            <select id="login-role" class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none transition bg-white font-semibold text-slate-800">
+                                <option value="student">🎓 Sinh viên (SV001)</option>
+                                <option value="lecturer">👩‍🏫 Giảng viên (GV001)</option>
+                                <option value="admin">🛠️ Quản trị viên (Admin)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="login-email" class="block text-xs font-semibold text-slate-700 mb-1">Email trường / Tài khoản</label>
+                            <input id="login-email" type="email" value="sv001@edutrack.edu.vn" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label for="login-password" class="block text-xs font-semibold text-slate-700 mb-1">Mật khẩu</label>
+                            <input id="login-password" type="password" value="123456" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none transition">
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" checked class="rounded border-slate-300 text-brand-600">
+                                <span class="text-slate-600">Ghi nhớ đăng nhập</span>
+                            </label>
+                            <a href="#" onclick="showToast('Liên hệ Phòng Đào Tạo hoặc Admin để cấp lại mật khẩu.', 'info')" class="text-brand-600 hover:underline font-medium">Quên mật khẩu?</a>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 text-white font-bold py-2.5 rounded-xl hover:bg-brand-700 transition text-xs shadow-md">Xác nhận đăng nhập</button>
+                    </form>
+                    <div class="relative flex py-1 items-center">
+                        <div class="flex-grow border-t border-slate-200"></div>
+                        <span class="flex-shrink mx-3 text-[11px] text-slate-400">Hoặc đăng nhập với</span>
+                        <div class="flex-grow border-t border-slate-200"></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button type="button" onclick="loginUser('student', 'Nguyễn Văn A', 'sv001@edutrack.edu.vn')" class="flex items-center justify-center gap-2 border border-slate-300 py-2 rounded-xl text-xs font-semibold hover:bg-slate-50 transition">
+                            <i class="fa-brands fa-google text-red-500"></i> Google SSO
+                        </button>
+                        <button type="button" onclick="loginUser('student', 'Nguyễn Văn A', 'sv001@edutrack.edu.vn')" class="flex items-center justify-center gap-2 border border-slate-300 py-2 rounded-xl text-xs font-semibold hover:bg-slate-50 transition">
+                            <i class="fa-brands fa-microsoft text-blue-500"></i> Office 365
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ĐĂNG KÝ -->
+            <section id="page-register" class="page-view hidden max-w-lg mx-auto py-6">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 space-y-6">
+                    <div class="text-center space-y-1">
+                        <h2 class="text-2xl font-bold text-slate-800">Tạo Tài Khoản Mới</h2>
+                        <p class="text-xs text-slate-500">Đăng ký tham gia hệ thống EduTrack</p>
+                    </div>
+                    <form onsubmit="event.preventDefault(); showToast('Tạo tài khoản thành công! Vui lòng đăng nhập.', 'success'); navigate('login');" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label for="register-name" class="block text-xs font-semibold text-slate-700 mb-1">Họ và tên</label>
+                                <input id="register-name" type="text" placeholder="Nguyễn Văn A" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
+                            <div>
+                                <label for="register-role" class="block text-xs font-semibold text-slate-700 mb-1">Vai trò</label>
+                                <select id="register-role" class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none bg-white">
+                                    <option value="student">Sinh viên</option>
+                                    <option value="lecturer">Giảng viên</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="register-email" class="block text-xs font-semibold text-slate-700 mb-1">Email trường</label>
+                            <input id="register-email" type="email" placeholder="sv001@edutrack.edu.vn" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label for="register-password" class="block text-xs font-semibold text-slate-700 mb-1">Mật khẩu</label>
+                                <input id="register-password" type="password" placeholder="Mật khẩu" required class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
+                            <div>
+                                <label for="register-class-code" class="block text-xs font-semibold text-slate-700 mb-1">Mã Lớp / Khoa</label>
+                                <input id="register-class-code" type="text" placeholder="CNTT-K18A" class="w-full px-3 py-2 border rounded-xl text-xs focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 text-white font-bold py-2.5 rounded-xl hover:bg-brand-700 transition text-xs shadow-md">Đăng ký tài khoản</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- 👤 TÀI KHOẢN (PROFILE) -->
+            <section id="page-profile" class="page-view hidden space-y-6 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-6">
+                    <div class="relative">
+                        <img id="profile-display-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80" class="w-24 h-24 rounded-full object-cover border-4 border-brand-500 shadow" alt="Profile">
+                        <button onclick="showToast('Chọn ảnh đại diện thành công!', 'info')" type="button" class="absolute bottom-0 right-0 bg-brand-600 text-white p-2 rounded-full text-xs shadow hover:bg-brand-700"><i class="fa-solid fa-camera"></i></button>
+                    </div>
+                    <div class="space-y-1 text-center md:text-left flex-1">
+                        <div class="flex flex-col md:flex-row md:items-center gap-2">
+                            <h2 id="profile-display-name" class="text-2xl font-bold text-slate-800">Nguyễn Văn A</h2>
+                            <span id="profile-display-tag" class="bg-blue-100 text-brand-700 text-xs font-bold px-2.5 py-0.5 rounded-full inline-block w-max">Sinh viên Chính quy</span>
+                        </div>
+                        <p id="profile-display-code" class="text-xs text-slate-500">Mã định danh: SV2026889 | Khoa Công Nghệ Thông Tin</p>
+                        <p class="text-xs text-slate-400">Trường Đại Học EduTrack</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <h3 class="font-bold text-slate-800 border-b pb-2 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-user-pen text-brand-600"></i> Cập nhật thông tin cá nhân
+                        </h3>
+                        <form onsubmit="event.preventDefault(); showToast('Đã lưu thông tin cá nhân thành công!', 'success');" class="space-y-3">
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600">Họ và tên</label>
+                                <input type="text" id="profile-edit-name" value="Nguyễn Văn A" class="w-full px-3 py-2 border rounded-xl text-xs mt-1 outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600">Số điện thoại</label>
+                                <input type="text" value="0912345678" class="w-full px-3 py-2 border rounded-xl text-xs mt-1 outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600">Email liên hệ</label>
+                                <input type="email" id="profile-edit-email" value="nguyenvana@gmail.com" class="w-full px-3 py-2 border rounded-xl text-xs mt-1 outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <button type="submit" class="bg-brand-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-brand-700 transition">Lưu thay đổi</button>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <h3 class="font-bold text-slate-800 border-b pb-2 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-key text-brand-600"></i> Đổi mật khẩu
+                        </h3>
+                        <form onsubmit="event.preventDefault(); showToast('Đổi mật khẩu thành công!', 'success');" class="space-y-3">
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600">Mật khẩu hiện tại</label>
+                                <input type="password" placeholder="••••••••" class="w-full px-3 py-2 border rounded-xl text-xs mt-1 outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600">Mật khẩu mới</label>
+                                <input type="password" placeholder="Mật khẩu mới" class="w-full px-3 py-2 border rounded-xl text-xs mt-1 outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <div>
+                                <label class="text-xs font-semibold text-slate-600">Xác nhận mật khẩu mới</label>
+                                <input type="password" placeholder="Xác nhận mật khẩu" class="w-full px-3 py-2 border rounded-xl text-xs mt-1 outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                            <button type="submit" class="bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-900 transition">Cập nhật mật khẩu</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
