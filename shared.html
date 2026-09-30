@@ -1,0 +1,58 @@
+            <!-- THÔNG BÁO HỆ THỐNG -->
+            <section id="page-notifications" class="page-view hidden space-y-6 max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold text-slate-800">Thông Báo Hệ Thống</h2>
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm divide-y divide-slate-100 text-xs">
+                    <div class="p-4 flex gap-3 hover:bg-slate-50 transition">
+                        <div class="p-2.5 bg-red-100 text-red-600 rounded-xl h-max"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 font-mono">10 phút trước</span>
+                            <h4 class="font-bold text-slate-800 text-sm">Cảnh báo rớt môn Cơ sở dữ liệu</h4>
+                            <p class="text-slate-600 mt-0.5">Hệ thống phát hiện nguy cơ rớt môn của bạn tăng lên 78%. Vui lòng kiểm tra mục Cảnh báo học tập.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 flex gap-3 hover:bg-slate-50 transition">
+                        <div class="p-2.5 bg-blue-100 text-brand-600 rounded-xl h-max"><i class="fa-solid fa-bell"></i></div>
+                        <div>
+                            <span class="text-[10px] text-slate-400 font-mono">2 giờ trước</span>
+                            <h4 class="font-bold text-slate-800 text-sm">Lịch thi giữa kỳ môn Mạng Máy Tính</h4>
+                            <p class="text-slate-600 mt-0.5">Phòng Đào tạo đã cập nhật lịch thi chính thức vào ngày Thứ 6 tuần này tại Hội Trường A.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HỖ TRỢ & FAQ -->
+            <section id="page-support" class="page-view hidden space-y-6 max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold text-slate-800">Trung Tâm Hỗ Trợ & FAQ</h2>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 text-xs">
+                    <div class="border-b pb-3 space-y-1">
+                        <h4 class="font-bold text-slate-800 text-sm">1. Làm thế nào khi không quét được mã QR điểm danh?</h4>
+                        <p class="text-slate-600">Bạn vui lòng kiểm tra kết nối mạng hoặc yêu cầu Giảng viên cho phép điểm danh thủ công cuối giờ học.</p>
+                    </div>
+                    <div class="border-b pb-3 space-y-1">
+                        <h4 class="font-bold text-slate-800 text-sm">2. AI dự đoán nguy cơ rớt môn dựa trên cơ sở nào?</h4>
+                        <p class="text-slate-600">Thuật toán dựa trên 3 yếu tố chính: Tỷ lệ chuyên cần, Điểm kiểm tra thường xuyên và Điểm bài tập về nhà.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIỄN ĐÀN & TIN TỨC -->
+            <section id="page-forum" class="page-view hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-slate-800">Diễn Đàn Học Tập & Bản Tin EduTrack</h2>
+                    <button onclick="showToast('Tính năng tạo bài viết đang mở...', 'info')" class="bg-brand-600 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-brand-700 transition">Đăng bài viết mới</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <span class="bg-blue-100 text-brand-700 font-bold text-[10px] px-2.5 py-0.5 rounded-full">Góc Học Tập</span>
+                        <h3 class="font-bold text-slate-800 text-sm hover:text-brand-600 cursor-pointer">Kinh nghiệm đạt điểm 9+ môn Trí tuệ nhân tạo</h3>
+                        <p class="text-xs text-slate-500">Chia sẻ bởi Sinh viên Nguyễn Văn A - Lớp K18A</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <span class="bg-emerald-100 text-emerald-700 font-bold text-[10px] px-2.5 py-0.5 rounded-full">Thông Báo Khoa</span>
+                        <h3 class="font-bold text-slate-800 text-sm hover:text-brand-600 cursor-pointer">Thông báo đăng ký đề tài Lạc tốt nghiệp đợt 2</h3>
+                        <p class="text-xs text-slate-500">Đăng bởi Văn phòng Khoa CNTT</p>
+                    </div>
+                </div>
+            </section>
+
